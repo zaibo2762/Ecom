@@ -1,9 +1,9 @@
 <div class="jumbotron">
     <div class="conatiner">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-6 offset-md-3" *ngIf="regForm">
                 <h3>Registration Form</h3>
-                <form>
+                <form [formGroup]="signUpform" (ngSubmit)="onsubmitSignUp()">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" placeholder="Enter Your Name" formControlName="name">
@@ -14,7 +14,7 @@
                     </div>
                     <div class="form-group">
                         <label for="age">Age</label>
-                        <input type="number" class="form-control" placeholder="Enter Your Age" formControlName="number">
+                        <input type="number" class="form-control" placeholder="Enter Your Age" formControlName="age">
                     </div>
                     <div class="form-group">
                         <label for="dob">Date Of Birth</label>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="zip">Zip Code</label>
-                            <input type="text" class="form-control" placeholder="Enter your Zip Code" formControlName="zipCode">
+                            <input type="text" class="form-control" placeholder="Enter your Zip Code" formControlName="zipcode">
                         </div>
                     </div>
                     <div class="form-group">
@@ -63,7 +63,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="gander">Gender</label>
+                        <label for="gender">Gender</label>
                         <div class="form-check-inline">
                             <input type="radio" class="form-check-inline" formControlName="gender" value="Male">
                             <label for="male" class="form-check-inline">Male</label>
@@ -73,13 +73,13 @@
                             <label for="female" class="form-check-inline">Female</label>
                         </div>
                         <div class="form-check-inline">
-                            <input disabled type="radio" class="form-check-inline" formControlName="gender" value="others">
+                            <input  type="radio" class="form-check-inline" formControlName="gender" value="others">
                             <label for="others" class="form-check-inline">Others</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="somthingAboutYou">Something About You</label>
-                        <textarea class="form-control" rows="3" formControlName="aboutYou"></textarea>
+                        <textarea class="form-control" rows="3" formControlName="aboutyou"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="uploadPhoto">Upload your Photo</label>
@@ -100,9 +100,28 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary">Register</button>
+                        <button type="submit" class="btn btn-primary" >Register</button>
                     </div>
                 </form>
+                <!--Login Form Here-->
+                <a class="sim-pointer" routerLink="/sign-in">Already Have Acccount Click Here To Log-In</a>
+            </div>
+            <div class="col-md6 offset-md-3" *ngIf="!regForm">
+                <h3>Log In</h3>
+                <form name="form" #tf="ngForm" (ngSubmit)="tf.form.valid && onsubmitSignIn()" novalidate>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" placeholder="Enter Email" name="userEmail" [(ngModel)]="singInFormValue.userEmail" #userEmail="ngModel" required Email>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" type="password" placeholder="Enter password" name="userPassword" [(ngModel)]="singInFormValue.userPassword"  #userPassword="ngModel"  minlength="6" togglePassword>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Log IN</button>
+                    </div>
+                </form>
+                <a class="sim-pointer" routerLink="/sign-up"> Don't Have Acccount Click Here To Resgister</a>
             </div>
         </div>
     </div>

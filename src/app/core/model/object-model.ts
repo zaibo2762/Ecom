@@ -11,7 +11,7 @@ export class User{
     dob!:string
     agreetc!:boolean
     age!:number
-    aboutYou!:string
+    aboutyou!:string
 }
 export class Address{
     id!:number
